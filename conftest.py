@@ -30,6 +30,6 @@ def get_token():
         'Cookie': cookie_string
     }
     print(cookie_string)
-
+    print(headers)
 
 get_token()
