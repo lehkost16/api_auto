@@ -10,21 +10,24 @@ from common import base_data
 #
 # pur_passwd = base_data.pur_passwd
 @pytest.fixture(scope='class')
-def get_token():
+def get_cookies():
     user_data = {
         "username": base_data.pur_account,
         "password": base_data.pur_passwd,
         "imageCode": "0000"
     }
-    # session = requests.session()
-    resp = requests.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data)  ##获取登陆接口
+    session = requests.session()
+    resp = session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data, allow_redirects=False)  ##获取登陆接口
     # session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data)
-    cookies = resp.cookies
-    print('cookie', cookies)
-
-    response_index = requests.get(base_data.base_url, cookies=cookies)
-    print('Response Status', response_index.status_code)
-    print('Response URL', response_index.url)
+    cookies = dict(resp.cookies)
+    headers =resp.headers
+    yield cookies
+    # cookies = resp.cookies.get_dict()
+    # cookies = dict(resp.cookies)
+    # print('cookie', cookies)
+    # response_index = requests.get(base_data.base_url, cookies=cookies)
+    # print('Response Status', response_index.status_code)
+    # print('Response URL', response_index.url)
 
     # print(resp.cookies)
     # cookiejar = resp.cookies.get_dict()
@@ -40,7 +43,18 @@ def get_token():
     # }
     # print(cookie_string)
     # print(headers)
-
+@pytest.fixture(scope='class')
+def get_headers():
+    user_data = {
+        "username": base_data.pur_account,
+        "password": base_data.pur_passwd,
+        "imageCode": "0000"
+    }
+    session = requests.session()
+    resp = session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data,
+                        allow_redirects=False)
+    headers = resp.headers
+    yield headers
 
 # get_token()
 # @pytest.mark.usefixtures('get_token')
