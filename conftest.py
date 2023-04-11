@@ -20,7 +20,7 @@ def get_cookies():
     resp = session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data, allow_redirects=False)  ##获取登陆接口
     # session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data)
     cookies = dict(resp.cookies)
-    headers =resp.headers
+    # headers =resp.headers
     yield cookies
     # cookies = resp.cookies.get_dict()
     # cookies = dict(resp.cookies)

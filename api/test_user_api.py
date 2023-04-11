@@ -4,12 +4,20 @@ from api_auto.common import base_data
 
 # def test_fix(self):
 #     print('测试登陆夹具')
-def test_create(get_cookies):
+def test_createSettlementorder(get_cookies,get_headers):
     # print(get_cookies)
-    resp = requests.post(base_data.base_url +'/purchaser/trade/order/createSubmit', data=base_data.creatOrder,cookies=get_cookies)
+    print(get_headers)
+    resp = requests.post(base_data.base_url +'/purchaser/trade/invoiceOrder/asyncStandardCreate', json=base_data.createSettlementorder,cookies=get_cookies)
     # print(resp.cookies)
-    print(resp.url)
+    print(resp.text)
     print(resp.status_code)
-    assert resp.text
+
+def test_createOrder(get_cookies,get_headers):
+    # print(get_cookies)
+    print(get_headers)
+    resp = requests.post(base_data.base_url +'/purchaser/trade/order/createSubmit', data=base_data.createOrder,cookies=get_cookies)
+    # print(resp.cookies)
+    print(resp.text)
+    print(resp.status_code)
 if __name__ == "__main__":
     pytest.main()
