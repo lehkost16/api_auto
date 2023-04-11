@@ -1,7 +1,8 @@
+import json
 import pytest
 import requests
 from api_auto.common import base_data
-
+from api_auto.common import MyEncoder
 # def test_fix(self):
 #     print('测试登陆夹具')
 def test_createSettlementorder(get_cookies,get_headers):
@@ -11,11 +12,14 @@ def test_createSettlementorder(get_cookies,get_headers):
     # print(resp.cookies)
     print(resp.text)
     print(resp.status_code)
-
+def get_data():
+    return base_data.createOrder
 def test_createOrder(get_cookies,get_headers):
     # print(get_cookies)
-    print(get_headers)
-    resp = requests.post(base_data.base_url +'/purchaser/trade/order/createSubmit', data=base_data.createOrder,cookies=get_cookies)
+    # headers = {'Content-Type': 'application/json'}
+    data1=json.dumps(get_data(),ensure_ascii=False, sort_keys=True, indent=4)
+    # print(get_headers)
+    resp = requests.post(base_data.base_url +'/purchaser/trade/order/createSubmit', json=data1,cookies=get_cookies)
     # print(resp.cookies)
     print(resp.text)
     print(resp.status_code)
