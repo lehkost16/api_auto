@@ -1,8 +1,7 @@
 import pytest
 import requests
 
-from common import base_data
-
+import common.base_data as bd
 
 # 夹具client
 
@@ -12,12 +11,13 @@ from common import base_data
 @pytest.fixture(scope='class')
 def get_cookies():
     user_data = {
-        "username": base_data.pur_account,
-        "password": base_data.pur_passwd,
+        "username": bd.pur_account1,
+        "password": bd.pur_passwd1,
         "imageCode": "0000"
     }
     session = requests.session()
-    resp = session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data, allow_redirects=False)  ##获取登陆接口
+    resp = session.post(bd.base_url1 + "/userauth/cloLogin/purchaser_login", json=user_data,
+                        allow_redirects=False)  ##获取登陆接口
     # session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data)
     cookies = dict(resp.cookies)
     # headers =resp.headers
@@ -36,26 +36,27 @@ def get_cookies():
     # print('there is a token in resp', resp.json())
     # print('the data of token', x['user_data']['token'])
     # cookiejar['Authorization'] = x['user_data']['token']
-    # print('the cookie has add a token', cookiejar)
+    # print('the cookie has added a token', cookiejar)
     # cookie_string = ';'.join(str(x) + '=' + str(y) for x, y in cookiejar.items())
     # headers = {
     #     'Cookie': cookie_string
     # }
     # print(cookie_string)
     # print(headers)
+
+
 @pytest.fixture(scope='class')
 def get_headers():
     user_data = {
-        "username": base_data.pur_account,
-        "password": base_data.pur_passwd,
+        "username": bd.pur_account,
+        "password": bd.pur_passwd,
         "imageCode": "0000"
     }
     session = requests.session()
-    resp = session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data,
+    resp = session.post(bd.base_url + "/userauth/cloLogin/purchaser_login", json=user_data,
                         allow_redirects=False)
     headers = resp.headers
     yield headers
 
 # get_token()
 # @pytest.mark.usefixtures('get_token')
-
