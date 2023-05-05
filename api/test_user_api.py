@@ -34,7 +34,7 @@ def test_createStatement(get_cookies):
     resp =requests.post(bd.base_url1+'/purchaser/trade/settlementOrder/ar/batchCreate',json=bd.createStatement,cookies=get_cookies)
     print(resp.text)
     assert re.search('"code":"success"',resp.text)
-
+    print('hello')
 
 if __name__ == "__main__":
     pytest.main()
