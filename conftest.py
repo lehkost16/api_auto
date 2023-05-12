@@ -3,6 +3,12 @@ import requests
 
 import common.base_data as bd
 
+# login info
+user_data = {
+    "username": bd.pur_account,
+    "password": bd.pur_passwd,
+    "imageCode": "0000"
+}
 # 夹具client
 
 # pur_passwd_bytes = base_data.pur_passwd.encode('utf-8')
@@ -10,13 +16,9 @@ import common.base_data as bd
 # pur_passwd = base_data.pur_passwd
 @pytest.fixture(scope='class')
 def get_cookies():
-    user_data = {
-        "username": bd.pur_account1,
-        "password": bd.pur_passwd1,
-        "imageCode": "0000"
-    }
+
     session = requests.session()
-    resp = session.post(bd.base_url1 + "/userauth/cloLogin/purchaser_login", json=user_data,
+    resp = session.post(bd.http_t+'://'+bd.pur_url + "/userauth/cloLogin/purchaser_login", json=user_data,
                         allow_redirects=False)  ##获取登陆接口
     # session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data)
     cookies = dict(resp.cookies)
@@ -24,36 +26,17 @@ def get_cookies():
     yield cookies
     # cookies = resp.cookies.get_dict()
     # cookies = dict(resp.cookies)
-    # print('cookie', cookies)
+    print('cookie', cookies)
     # response_index = requests.get(base_data.base_url, cookies=cookies)
     # print('Response Status', response_index.status_code)
     # print('Response URL', response_index.url)
 
-    # print(resp.cookies)
-    # cookiejar = resp.cookies.get_dict()
-    # print('first cookie', cookiejar)
-    # x = resp.json()
-    # print('there is a token in resp', resp.json())
-    # print('the data of token', x['user_data']['token'])
-    # cookiejar['Authorization'] = x['user_data']['token']
-    # print('the cookie has added a token', cookiejar)
-    # cookie_string = ';'.join(str(x) + '=' + str(y) for x, y in cookiejar.items())
-    # headers = {
-    #     'Cookie': cookie_string
-    # }
-    # print(cookie_string)
-    # print(headers)
-
 
 @pytest.fixture(scope='class')
 def get_headers():
-    user_data = {
-        "username": bd.pur_account,
-        "password": bd.pur_passwd,
-        "imageCode": "0000"
-    }
+
     session = requests.session()
-    resp = session.post(bd.base_url + "/userauth/cloLogin/purchaser_login", json=user_data,
+    resp = session.post(bd.http_t+'://'+bd.pur_url + "/userauth/cloLogin/purchaser_login", json=user_data,
                         allow_redirects=False)
     headers = resp.headers
     yield headers
