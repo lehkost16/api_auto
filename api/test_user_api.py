@@ -37,7 +37,7 @@ def test_createStatement(get_cookies):
 
 @allure.feature('创建付款申请')
 def test_create_payorder(get_cookies):
-    return 0
+    return 200
 
 
 
