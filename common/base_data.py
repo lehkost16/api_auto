@@ -32,13 +32,10 @@ pur_passwd = getloginInfo()['passwd']
 pur_url = getloginInfo()['url']
 http_t = getloginInfo()['http']
 
-
+conn.commit() # 提交操作到数据库
 cur.close()  # 关闭游标
 conn.close()  # 关闭数据库连接
 
-# getloginInfo()
-# def pwdDncryption(string):
-#
 
 
 
