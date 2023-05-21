@@ -44,8 +44,8 @@ def test_create_payorder(get_cookies):
 
 
 if __name__ == "__main__":
-    pytest.main(['--alluredir','./temp'])
-    os.system('allure generate ./temp -o ./report --clean')
+    pytest.main()
+
 
 
 
