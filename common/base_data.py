@@ -1,16 +1,14 @@
 # 基础数据
-from sqlalchemy import false, null, true
-import pymysql
-import pandas as pd
 
-#
+import pymysql
+
 try:
     config = {
-        'host': '0.0.0.0',
+        'host': '172.20.0.3',
         'port': 3306,
         'user': 'root',
         'passwd': '1201',
-        'db': 'account',
+        'db': 'acc_info',
         'charset': 'utf8mb4',
         "cursorclass": pymysql.cursors.DictCursor
     }
@@ -31,6 +29,8 @@ pur_account = getloginInfo()['user_name']
 pur_passwd = getloginInfo()['passwd']
 pur_url = getloginInfo()['url']
 http_t = getloginInfo()['http']
+
+print(getloginInfo())
 
 conn.commit() # 提交操作到数据库
 cur.close()  # 关闭游标
