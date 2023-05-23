@@ -1,4 +1,4 @@
-# 基础数据
+# base_data
 
 import pymysql
 
@@ -38,4 +38,4 @@ conn.close()  # 关闭数据库连接
 
 
 
-
+## zhangfei
