@@ -9,6 +9,8 @@ user_data = {
     "password": bd.pur_passwd,
     "imageCode": "0000"
 }
+
+
 # 夹具client
 
 # pur_passwd_bytes = base_data.pur_passwd.encode('utf-8')
@@ -16,9 +18,8 @@ user_data = {
 # pur_passwd = base_data.pur_passwd
 @pytest.fixture(scope='class')
 def get_cookies():
-
     session = requests.session()
-    resp = session.post(bd.http_t+'://'+bd.pur_url + "/userauth/cloLogin/purchaser_login", json=user_data,
+    resp = session.post(bd.http_t + '://' + bd.pur_url + "/userauth/cloLogin/purchaser_login", json=user_data,
                         allow_redirects=False)  ##获取登陆接口
     # session.post(base_data.base_url + "/userauth/cloLogin/purchaser_login", json=user_data)
     cookies = dict(resp.cookies)
@@ -34,9 +35,8 @@ def get_cookies():
 
 @pytest.fixture(scope='class')
 def get_headers():
-
     session = requests.session()
-    resp = session.post(bd.http_t+'://'+bd.pur_url + "/userauth/cloLogin/purchaser_login", json=user_data,
+    resp = session.post(bd.http_t + '://' + bd.pur_url + "/userauth/cloLogin/purchaser_login", json=user_data,
                         allow_redirects=False)
     headers = resp.headers
     yield headers
